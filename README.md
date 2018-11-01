@@ -1,5 +1,4 @@
-# TodoList with Flask
-__로컬 환경에서 실행__
+# 로컬에서 TodoList with Flask
 >**python3, flask, jinja2, mariadb, ubuntu16**
 
 ### 데이터베이스 세팅 (mysql_server)
