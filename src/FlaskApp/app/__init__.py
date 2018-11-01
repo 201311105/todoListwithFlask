@@ -5,8 +5,14 @@ from datetime import datetime
 import json, os, jinja2
 
 app = Flask(__name__)
+app.secret_key = 'super secret key'
+app.config['SESSION_TYPE'] = 'filesystem'
 
 @app.route('/')
+def redir():
+    return redirect(url_for('login'))
+
+@app.route('/login')
 def login():
 	return render_template('login.html')
 
@@ -20,14 +26,16 @@ def validateSignup():
 	passwd1 = request.form['passwd1']
 	passwd2 = request.form['passwd2']
 	if passwd1 != passwd2:
-		return render_template('login.html', messages=["패스워드가 서로 다름"])
+			flash("비밀번호가 서로 다릅니다")
+			return redirect(url_for('signup'))
 	else:
 		res = db.signUp(userid, passwd1)
 		if not res:
-			return render_template('login.html', messages=["이미 존재하는 id"])
+			flash("이미 존재하는 아이디")
+			return redirect(url_for('login'))
 		else:		
 			flash("회원가입 완료")
-			return redirect(url_for(''))
+			return redirect(url_for('login'))
 
 @app.route('/validateLogin', methods=["POST"])
 def validateLogin():

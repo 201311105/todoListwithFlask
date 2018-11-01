@@ -32,6 +32,15 @@
 				<header class="major">
 					<h2>회원 가입</h2>
 				</header>
+				{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					<ul class=flashes>
+				{% for message in messages %}
+					<li>{{ message }}</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+				{% endwith %}
 			<form action='/validateSignup' method='POST'>
 				<!-- Content -->
 				<section id="content">

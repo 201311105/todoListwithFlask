@@ -19,7 +19,7 @@
 	<tr>
         {% if item['seq'] not in select %}
             <input type='hidden' name='userid' value={{userid}}> 
-            <td> <input type="checkbox" name="checkbox" value={{item["seq"]}}></td>
+            <td> <input type="hidden" name="checkbox" value={{item["seq"]}}></td>
             <td> <name="priority">{{item["priority"]}}</td>
             <td> <name="title">{{item["title"]}}</td>
             <td> <name="contain">{{item["contain"]}}</td>
