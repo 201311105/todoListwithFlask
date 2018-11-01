@@ -4,8 +4,8 @@
 
 <hr>
 ### 데이터베이스 세팅
-> (mysql) user = root , passwd = '1234' 설정
->>create database todo;
+>(mysql) user = root , passwd = '1234' 설정
+>create database todo;
 use todo;
 create table todolist (
 seq int auto_increment primary key,
