@@ -8,6 +8,8 @@ user = root , passwd = '1234' 설정
 <pre><code>
 create database todo;
 use todo;
+</code></pre>
+<pre><code>
 create table todolist (
 seq int auto_increment primary key,
 userid varchar(50) not null,
@@ -16,8 +18,10 @@ title varchar(50),
 contain varchar(50),
 deadline varchar(50),
 idDone varchar(50));
+</code>
+<code>
 create table users (
 userid varchar(50) primary key
 passwd varchar(50));
-</code><pre>
+</code></pre>
 <hr/>
