@@ -13,11 +13,11 @@ priority varchar(20) default '0',
 title varchar(50),
 contain varchar(50),
 deadline varchar(50),
-idDone varchar(50))DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
+idDone varchar(50))DEFAULT CHARSET=utf8;
 </code><code>
 create table users (
 userid varchar(50) primary key
-passwd varchar(50))DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
+passwd varchar(50))DEFAULT CHARSET=utf8;
 </code></pre>
 ### 실행환경 세팅 (python3)
 >**src/FlaskApp/requirements.txt 의 모듈 설치**
