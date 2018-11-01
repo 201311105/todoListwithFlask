@@ -33,11 +33,11 @@
             <input type='hidden' name='seq' value={{item['seq']}}>
             <input type='hidden' name='userid' value={{userid}}> 
             <td> <input type="checkbox" name="checkbox" value={{item["seq"]}}></td>
-            <td> <input type="text" name="priority" id="priority"></td>
-            <td> <input type="text" name="title" id="title"></td>
-            <td> <input type="text" name="contents" id="contents"></td>
-            <td> <input type="text" name="deadline" id="deadline"></td>
-            <td> <input type="text" name="isDone" id="isDone"></td>        
+            <td> <input type="text" name="priority" id="priority" value={{item["priority"]}}></td>
+            <td> <input type="text" name="title" id="title" value={{item["title"]}}></td>
+            <td> <input type="text" name="contents" id="contents" value={{item["contain"]}}></td>
+            <td> <input type="text" name="deadline" id="deadline" value={{item["deadline"][0]}}></td>
+            <td> <input type="text" name="isDone" id="isDone" value={{item["isDone"]}}></td>        
         {% endif %}
 	</tr>
 </tbody>
