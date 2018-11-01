@@ -4,8 +4,7 @@
 
 ### 데이터베이스 세팅 (mysql_server)
 >**user = root , passwd = '1234' 로 설정**
-<pre><code>
-create database todo;
+<pre><code>create database todo;
 use todo;
 </code><code>
 create table todolist (
