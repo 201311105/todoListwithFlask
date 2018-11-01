@@ -46,3 +46,17 @@ def insertSchedule(data):
     values (%s, %s, %s, %s, %s)"
     curs.execute(sql, (data[0], data[1], data[2], data[3], data[4]))
     conn.commit()
+
+def signUp(userid, passwd):
+    global conn
+    curs = conn.cursor(pymysql.cursors.DictCursor)
+    sql = "select * from users where userid = %s"
+    row = curs.execute(sql, (userid))
+    if row:
+        return False
+    else:
+        sql = "insert into users values (%s, %s)"
+        curs.execute(sql, (userid, passwd))
+        conn.commit()
+        return True
+    
