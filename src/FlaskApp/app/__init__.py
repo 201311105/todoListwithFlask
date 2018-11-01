@@ -45,7 +45,8 @@ def validateLogin():
 		if db.getauth(userid, passwd):
 				return redirect(url_for('main', userid=userid))
 		else:
-				return render_template('login.html')
+			flash("존재하지 않는 아이디거나 비밀번호가 틀렸을꺼야")
+			return redirect(url_for('login'))
 	except Exception as e:
 		return render_template('login.html')
 
