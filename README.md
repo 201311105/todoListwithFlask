@@ -3,7 +3,7 @@
 >mariadb, ubuntu16**
 
 <hr>
-## 데이터베이스 세팅
+## 데이터베이스 세팅 ##
 _(mysql) user = root , passwd = '1234' 설정
 create database todo;
 use todo;
@@ -17,5 +17,5 @@ deadline varchar(50),
 idDone varchar(50));
 create table users (
 userid varchar(50) primary key
-passwd varchar(50));
+passwd varchar(50));_
 <hr/>
