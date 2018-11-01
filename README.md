@@ -25,7 +25,7 @@ passwd varchar(50));
 >**src/FlaskApp/requirements.txt 의 모듈 설치**
 <pre><code>pip3 install -r requirements.txt
 </code></pre>
->**FlaskApp 폴더의 run.py 실행**
+>**src/FlaskApp 폴더의 run.py 실행**
 <pre><code>python3 install run.py
 </code></pre>
 >**백그라운드에서 실행**
