@@ -1,8 +1,8 @@
 # _*_ coding: utf-8 _*_
-from flask import Flask, flash, g, request, render_template, url_for, redirect
+from flask import Flask, flash, request, render_template, url_for, redirect
 from app import db
 from datetime import datetime
-import json, requests, os, jinja2
+import json, os, jinja2
 
 app = Flask(__name__)
 
