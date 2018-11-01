@@ -1,3 +1,3 @@
 # TodoList with Flask
->*python3, flask, jinja2*
->_mariadb, ubuntu16_
+>**python3, flask, jinja2
+>mariadb, ubuntu16**
