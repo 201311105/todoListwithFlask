@@ -5,6 +5,7 @@
 <hr>
 ## 데이터베이스 세팅 (mysql_server)
 user = root , passwd = '1234' 설정
+<pre><code>
 create database todo;
 use todo;
 create table todolist (
@@ -17,5 +18,6 @@ deadline varchar(50),
 idDone varchar(50));
 create table users (
 userid varchar(50) primary key
-passwd varchar(50));_
+passwd varchar(50));
+</code><pre>
 <hr/>
