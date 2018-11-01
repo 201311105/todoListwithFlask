@@ -16,10 +16,14 @@ def signup():
 	passwd1 = request.form['passwd1']
 	passwd2 = request.form['passwd2']
 	if passwd1 != passwd2:
-		return redirect(url_for('/'))
+		return render_template('auth/login.html', messages=["패스워드가 서로 다름"])
 	else:
-		db.signUp(userid, passwd1)
-		return redirect(url_for('/'))
+		res = db.signUp(userid, passwd1)
+		if not res:
+			return render_template('auth/login.html', messages=["이미 존재하는 id"])
+		else:		
+			flash("회원가입 완료")
+			return redirect(url_for('/'))
 
 @app.route('/validateLogin', methods=["POST"])
 def validateLogin():
