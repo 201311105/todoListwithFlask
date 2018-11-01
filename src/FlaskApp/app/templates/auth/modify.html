@@ -1,0 +1,45 @@
+{% extends "auth/layout.html"%}
+{% block content %}
+<div class="table-wrapper">
+    <table class="alt">
+        <thead>
+        <form action='/modifyTodo' method='POST'>
+        <button id='modify' type='submit' name='button' value='done'>완료</button>
+            <tr>
+                <th> </th>
+                <th>우선 순위</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>마감 기한</th>
+                <th>완료 여부</th>
+            </tr>
+        </thead>
+{% for item in data %}
+<tbody>
+	<tr>
+        {% if item['seq'] not in select %}
+            <input type='hidden' name='userid' value={{userid}}> 
+            <td> <input type="checkbox" name="checkbox" value={{item["seq"]}}></td>
+            <td> <name="priority">{{item["priority"]}}</td>
+            <td> <name="title">{{item["title"]}}</td>
+            <td> <name="contain">{{item["contain"]}}</td>
+            {% if item["deadline"][0] > item["deadline"][1]%}
+                <td bgcolor="red"> <name="deadline">{{item["deadline"][0]}}</td>
+            {% else %}
+                <td><name="deadline">{{item["deadline"][0]}}</td>
+            {% endif %}
+            <td> <name="isDone"> {{item["isDone"]}}</td>
+        {% else %}
+            <input type='hidden' name='seq' value={{item['seq']}}>
+            <input type='hidden' name='userid' value={{userid}}> 
+            <td> <input type="checkbox" name="checkbox" value={{item["seq"]}}></td>
+            <td> <input type="text" name="priority" id="priority"></td>
+            <td> <input type="text" name="title" id="title"></td>
+            <td> <input type="text" name="contents" id="contents"></td>
+            <td> <input type="text" name="deadline" id="deadline"></td>
+            <td> <input type="text" name="isDone" id="isDone"></td>        
+        {% endif %}
+	</tr>
+</tbody>
+{% endfor %}
+{% endblock %}

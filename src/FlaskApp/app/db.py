@@ -59,4 +59,13 @@ def signUp(userid, passwd):
         curs.execute(sql, (userid, passwd))
         conn.commit()
         return True
-    
+
+def modifySchedule(data):
+    global conn
+    curs = conn.cursor(pymysql.cursors.DictCursor)
+    sql = "update todolist set priority = %s, title = %s, contain = %s, deadline = %s, isDone = %s\
+    where seq = %s"
+    for d in data:
+        print(d)
+        curs.execute(sql, (d[0], d[1], d[2], d[3], d[4], d[5]))
+    conn.commit()

@@ -36,14 +36,46 @@ def addTodo():
 	except Exception as e:
 		return redirect(url_for('main', userid=userid))
 
-@app.route('/deleteTodo', methods=['Post'])
-def deleteTodo():
+@app.route('/modify', methods=['POST'])
+def chkBtn():
 	userid = request.form['userid']
-	data = request.form.getlist('checkbox')
-	db.deleteSchedule(userid, data)
-	return redirect(url_for('main', userid=userid))
+	btn = request.form['button']
+	if btn == 'delete':
+		data = request.form.getlist('checkbox')
+		db.deleteSchedule(userid, data)
+		return redirect(url_for('main', userid=userid))	
 
-	
+	elif btn == 'modify':
+		chk = request.form.getlist('checkbox')
+		select = []
+		todo = db.getScheduler(userid)
+		todo = sorted(todo, key=lambda do: do["priority"])
+		for do in todo:
+			do["deadline"] = [str(do["deadline"]), datetime.now().strftime("%Y-%m-%d")]
+		for s in chk:
+			select.append(int(s))
+		return render_template('auth/modify.html', userid=userid, data=todo, select=select)
+
+@app.route('/modifyTodo', methods=["POST"])
+def modifyTodo():
+	try:
+		seq = request.form.getlist('seq')
+		userid = request.form['userid']
+		priority = request.form.getlist('priority')
+		title = request.form.getlist('title')
+		contain = request.form.getlist('contents')
+		deadline = request.form.getlist('deadline')
+		isDone = request.form.getlist('isDone')
+		modi = []
+		for i in range(len(seq)):
+			data = [priority[i], title[i], contain[i], deadline[i], isDone[i], int(seq[i])]
+			modi.append(data)
+		db.modifySchedule(modi)
+		return redirect(url_for('main', userid=userid))
+
+	except Exception as e:
+			return redirect(url_for('main', userid=userid))
+
 @app.route('/main/<userid>')
 def main(userid):
 	todo = db.getScheduler(userid)
