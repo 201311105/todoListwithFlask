@@ -1,9 +1,6 @@
 import json, pymysql
 
-conn = None
-
-def getConnection():
-        return pymysql.connect(host='localhost', user='root', password='1234',\
+conn = pymysql.connect(host='localhost', user='root', password='1234',\
         db='todo', charset='utf8')
 
 def date_handler(obj):
@@ -11,7 +8,6 @@ def date_handler(obj):
 
 def getauth(userid, passwd):
     global conn
-    conn = getConnection()
     curs = conn.cursor(pymysql.cursors.DictCursor)
     sql = "select * from users where userid = %s and passwd = %s"
 

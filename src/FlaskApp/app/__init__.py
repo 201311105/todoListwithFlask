@@ -10,8 +10,12 @@ app = Flask(__name__)
 def login():
 	return render_template('auth/login.html')
 
-@app.route('/signup', methods=["POST"])
+@app.route('/signup')
 def signup():
+    return render_template('auth/signup.html')
+
+@app.route('/validateSignup', methods=["POST"])
+def validateSignup():
 	userid = request.form['userid']
 	passwd1 = request.form['passwd1']
 	passwd2 = request.form['passwd2']
@@ -23,7 +27,7 @@ def signup():
 			return render_template('auth/login.html', messages=["이미 존재하는 id"])
 		else:		
 			flash("회원가입 완료")
-			return redirect(url_for('/'))
+			return redirect(url_for(''))
 
 @app.route('/validateLogin', methods=["POST"])
 def validateLogin():

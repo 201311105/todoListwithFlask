@@ -22,8 +22,7 @@
 
 		<!-- Header -->
 		<header id="header">
-			<nav id="nav">
-			</nav>
+			<h1 id="logo"><a href="/signup">회원가입</a></h1>
 		</header>
 
 		<!-- Main -->
@@ -32,6 +31,15 @@
 				<header class="major">
 					<h2>로그인</h2>
 				</header>
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					<ul class=flashes>
+				{% for message in messages %}
+					<li>{{ message }}</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+				{% endwith %}
 			<form action='/validateLogin' method='POST'>
 				<!-- Content -->
 				<section id="content">

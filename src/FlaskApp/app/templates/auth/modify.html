@@ -23,7 +23,7 @@
             <td> <name="priority">{{item["priority"]}}</td>
             <td> <name="title">{{item["title"]}}</td>
             <td> <name="contain">{{item["contain"]}}</td>
-            {% if item["deadline"][0] > item["deadline"][1]%}
+            {% if item["deadline"][0] < item["deadline"][1]%}
                 <td bgcolor="red"> <name="deadline">{{item["deadline"][0]}}</td>
             {% else %}
                 <td><name="deadline">{{item["deadline"][0]}}</td>
