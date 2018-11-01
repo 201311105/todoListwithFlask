@@ -3,8 +3,8 @@
 >mariadb, ubuntu16**
 
 <hr>
-##데이터베이스 세팅
-_(mysql) user = root , passwd = '1234' 설정
+## 데이터베이스 세팅 (mysql_server)
+user = root , passwd = '1234' 설정
 create database todo;
 use todo;
 create table todolist (
