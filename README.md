@@ -23,13 +23,12 @@ passwd varchar(50));
 </code></pre>
 ### 실행환경 세팅 (python3)
 >**src/FlaskApp/requirements.txt 의 모듈 설치**
-<pre><code>(sudo) pip3 install -r requirements.txt
+<pre><code>pip3 install -r requirements.txt
 </code></pre>
 >**FlaskApp 폴더의 run.py 실행**
-<pre><code>(sudo) python3 install run.py
+<pre><code>python3 install run.py
 </code></pre>
 >**백그라운드에서 실행**
-<pre><code>(sudo) python3 install run.py &</code>
-혹은
-<code>(sudo) nohup python3 install run.py &</code>
+<pre><code>python3 install run.py &</code> 혹은
+<code>nohup python3 install run.py &</code>
 </pre>
