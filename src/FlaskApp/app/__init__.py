@@ -10,6 +10,17 @@ app = Flask(__name__)
 def login():
 	return render_template('auth/login.html')
 
+@app.route('/signup', methods=["POST"])
+def signup():
+	userid = request.form['userid']
+	passwd1 = request.form['passwd1']
+	passwd2 = request.form['passwd2']
+	if passwd1 != passwd2:
+		return redirect(url_for('/'))
+	else:
+		db.signUp(userid, passwd1)
+		return redirect(url_for('/'))
+
 @app.route('/validateLogin', methods=["POST"])
 def validateLogin():
 	try:
