@@ -8,11 +8,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def login():
-	return render_template('auth/login.html')
+	return render_template('login.html')
 
 @app.route('/signup')
 def signup():
-    return render_template('auth/signup.html')
+    return render_template('signup.html')
 
 @app.route('/validateSignup', methods=["POST"])
 def validateSignup():
@@ -20,11 +20,11 @@ def validateSignup():
 	passwd1 = request.form['passwd1']
 	passwd2 = request.form['passwd2']
 	if passwd1 != passwd2:
-		return render_template('auth/login.html', messages=["패스워드가 서로 다름"])
+		return render_template('login.html', messages=["패스워드가 서로 다름"])
 	else:
 		res = db.signUp(userid, passwd1)
 		if not res:
-			return render_template('auth/login.html', messages=["이미 존재하는 id"])
+			return render_template('login.html', messages=["이미 존재하는 id"])
 		else:		
 			flash("회원가입 완료")
 			return redirect(url_for(''))
@@ -37,9 +37,9 @@ def validateLogin():
 		if db.getauth(userid, passwd):
 				return redirect(url_for('main', userid=userid))
 		else:
-				return render_template('auth/login.html')
+				return render_template('login.html')
 	except Exception as e:
-		return render_template('auth/login.html')
+		return render_template('login.html')
 
 @app.route('/addTodo', methods=["POST"])
 def addTodo():
@@ -73,7 +73,7 @@ def chkBtn():
 			do["deadline"] = [str(do["deadline"]), datetime.now().strftime("%Y-%m-%d")]
 		for s in chk:
 			select.append(int(s))
-		return render_template('auth/modify.html', userid=userid, data=todo, select=select)
+		return render_template('modify.html', userid=userid, data=todo, select=select)
 
 @app.route('/modifyTodo', methods=["POST"])
 def modifyTodo():
@@ -101,7 +101,7 @@ def main(userid):
 	todo = sorted(todo, key=lambda do: do["priority"])
 	for do in todo:
 			do["deadline"] = [str(do["deadline"]), datetime.now().strftime("%Y-%m-%d")]
-	return render_template('auth/index.html', data=todo, userid=userid)
+	return render_template('index.html', data=todo, userid=userid)
 
 
  
