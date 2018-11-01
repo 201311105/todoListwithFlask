@@ -2,8 +2,8 @@
 >**python3, flask, jinja2
 >mariadb, ubuntu16**
 
-## 데이터베이스 세팅 (mysql_server)
-user = root , passwd = '1234' 로 설정
+### 데이터베이스 세팅 (mysql_server)
+>**user = root , passwd = '1234' 로 설정**
 <pre><code>
 create database todo;
 use todo;
