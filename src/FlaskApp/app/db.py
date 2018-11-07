@@ -1,13 +1,15 @@
 import json, pymysql
 
-conn = pymysql.connect(host='localhost', user='root', password='1234',\
+
+def connection():
+        conn = pymysql.connect(host='localhost', user='root', password='1234',\
         db='todo', charset='utf8')
+        return conn
 
 def date_handler(obj):
     return obj.isoformat() if hasattr(obj, 'isoformat') else obj
 
-def getauth(userid, passwd):
-    global conn
+def getauth(conn, userid, passwd):
     curs = conn.cursor(pymysql.cursors.DictCursor)
     sql = "select * from users where userid = %s and passwd = %s"
 
@@ -19,8 +21,7 @@ def getauth(userid, passwd):
     else:
         return False
 
-def getScheduler(userid):
-    global conn
+def getScheduler(conn, userid):
     curs = conn.cursor(pymysql.cursors.DictCursor)
     sql = "select * from todolist where userid = %s"
     
@@ -30,8 +31,7 @@ def getScheduler(userid):
 
     return rows
 
-def deleteSchedule(userid, data):
-    global conn
+def deleteSchedule(conn, userid, data):
     curs = conn.cursor(pymysql.cursors.DictCursor)
     sql = "delete from todolist where userid = %s and seq = %s"
     for d in data:
@@ -39,8 +39,7 @@ def deleteSchedule(userid, data):
     curs.close()
     conn.commit()
     
-def insertSchedule(data):
-    global conn
+def insertSchedule(conn, data):
     curs = conn.cursor(pymysql.cursors.DictCursor)
     sql = "insert into todolist (userid, priority, title, contain, deadline) \
     values (%s, %s, %s, %s, %s)"
@@ -48,8 +47,7 @@ def insertSchedule(data):
     curs.close()
     conn.commit()
 
-def signUp(userid, passwd):
-    global conn
+def signUp(conn, userid, passwd):
     curs = conn.cursor(pymysql.cursors.DictCursor)
     sql = "select * from users where userid = %s"
     row = curs.execute(sql, (userid))
@@ -62,8 +60,7 @@ def signUp(userid, passwd):
         conn.commit()
         return True
 
-def modifySchedule(data):
-    global conn
+def modifySchedule(conn, data):
     curs = conn.cursor(pymysql.cursors.DictCursor)
     sql = "update todolist set priority = %s, title = %s, contain = %s, deadline = %s, isDone = %s\
     where seq = %s"

@@ -7,6 +7,7 @@ import json, os, jinja2
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 app.config['SESSION_TYPE'] = 'filesystem'
+conn = db.connection()
 
 @app.route('/')
 def redir():
@@ -29,7 +30,7 @@ def validateSignup():
 			flash("비밀번호가 서로 다릅니다")
 			return redirect(url_for('signup'))
 	else:
-		res = db.signUp(userid, passwd1)
+		res = db.signUp(conn, userid, passwd1)
 		if not res:
 			flash("이미 존재하는 아이디")
 			return redirect(url_for('login'))
@@ -42,7 +43,7 @@ def validateLogin():
 	try:
 		userid = request.form['userid']
 		passwd = request.form['passwd']
-		if db.getauth(userid, passwd):
+		if db.getauth(conn, userid, passwd):
 				return redirect(url_for('main', userid=userid))
 		else:
 			flash("존재하지 않는 아이디거나 비밀번호가 틀렸을꺼야")
@@ -59,7 +60,7 @@ def addTodo():
 		contain = request.form['contents']
 		deadline = request.form['deadline']
 		data = [userid, int(priority), title, contain, deadline]
-		db.insertSchedule(data)
+		db.insertSchedule(conn, data)
 		return redirect(url_for('main', userid=userid))
 	except Exception as e:
 		return redirect(url_for('main', userid=userid))
@@ -70,13 +71,13 @@ def chkBtn():
 	btn = request.form['button']
 	if btn == 'delete':
 		data = request.form.getlist('checkbox')
-		db.deleteSchedule(userid, data)
+		db.deleteSchedule(conn, userid, data)
 		return redirect(url_for('main', userid=userid))	
 
 	elif btn == 'modify':
 		chk = request.form.getlist('checkbox')
 		select = []
-		todo = db.getScheduler(userid)
+		todo = db.getScheduler(conn, userid)
 		todo = sorted(todo, key=lambda do: do["priority"])
 		for do in todo:
 			do["deadline"] = [str(do["deadline"]), datetime.now().strftime("%Y-%m-%d")]
@@ -98,7 +99,7 @@ def modifyTodo():
 		for i in range(len(seq)):
 			data = [priority[i], title[i], contain[i], deadline[i], isDone[i], int(seq[i])]
 			modi.append(data)
-		db.modifySchedule(modi)
+		db.modifySchedule(conn, modi)
 		return redirect(url_for('main', userid=userid))
 
 	except Exception as e:
@@ -106,7 +107,7 @@ def modifyTodo():
 
 @app.route('/main/<userid>')
 def main(userid):
-	todo = db.getScheduler(userid)
+	todo = db.getScheduler(conn, userid)
 	todo = sorted(todo, key=lambda do: do["priority"])
 	for do in todo:
 			do["deadline"] = [str(do["deadline"]), datetime.now().strftime("%Y-%m-%d")]
